@@ -32,9 +32,6 @@ public class RoleService {
         role = new Role();
         role.setName(req.getRoleName());
         role.setRemark(req.getRemark());
-        role.setCreateTime(new Date());
-        role.setUpdateTime(new Date());
-        role.setDeleted(false);
         roleMapper.insert(role);
     }
 }

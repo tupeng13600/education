@@ -35,11 +35,8 @@ public class UserService {
     public void insert(RegisterReq req) {
         User regUser = new User();
         BeanUtils.copyProperties(req, regUser);
-        regUser.setCreateTime(new Date());
-        regUser.setUpdateTime(new Date());
         regUser.setLastLoginIp("0.0.0.0");
         regUser.setLastLoginTime(new Date());
-        regUser.setDeleted(false);
         regUser.setSalt(UpcSecurityUtil.randomString());
         regUser.setPassword(UpcSecurityUtil.encryptPwd(req.getPassword(), new SimpleByteSource(regUser.getSalt())));
         regUser.setRoleId("1");

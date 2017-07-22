@@ -54,4 +54,22 @@
     UPDATE `user` SET last_login_time=#{loginTime}, last_login_ip = #{loginIp}, update_time=#{updateTime} WHERE username=#{username};
   </update>
 
+    <select id="getByEntityId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseTemplate"/>
+        FROM `user` WHERE entity_id = #{entityId} AND user_type = #{userType};
+    </select>
+
+    <update id="updateBase">
+        UPDATE user SET
+        name = #{user.name},
+        phone = #{user.phone},
+        update_time = #{user.updateTime}
+        WHERE id = #{user.id} AND deleted = FALSE;
+    </update>
+
+    <update id="deleteLogic">
+        UPDATE deleted = TRUE , update_time = #{updateTime} WHERE id = #{id};
+    </update>
+
 </mapper>

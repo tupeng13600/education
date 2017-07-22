@@ -7,6 +7,7 @@ import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlCommandType;
 import org.apache.ibatis.plugin.*;
 
+import java.util.Date;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -19,6 +20,9 @@ import java.util.UUID;
 public class MybatisUpdateInterceptors implements Interceptor {
 
     private static final String autoCreateIdKey = "id";
+    private static final String createTimeKey = "createTime";
+    private static final String updateTimeKey = "updateTime";
+    private static final String deletedKey = "deleted";
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
@@ -28,6 +32,9 @@ public class MybatisUpdateInterceptors implements Interceptor {
                 if (!(arg instanceof MappedStatement)) {
                     String id = UUID.randomUUID().toString().replaceAll("-", "");
                     ReflectUtil.setProperty(arg, autoCreateIdKey, id);
+                    ReflectUtil.setProperty(arg, createTimeKey, new Date());
+                    ReflectUtil.setProperty(arg, updateTimeKey, new Date());
+                    ReflectUtil.setProperty(arg, deletedKey, false);
                 }
             }
         }
