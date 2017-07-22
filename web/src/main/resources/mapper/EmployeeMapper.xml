@@ -50,7 +50,7 @@
     </select>
 
     <select id="getAll" resultMap="BaseResultMap">
-        SELECT <include refid="baseSql"/>
+        SELECT <include refid="baseSql"/> FROM employee
     </select>
 
     <update id="update">

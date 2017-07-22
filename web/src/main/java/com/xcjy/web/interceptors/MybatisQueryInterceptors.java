@@ -26,9 +26,9 @@ public class MybatisQueryInterceptors implements Interceptor {
 
     private static final String andCondition = " AND deleted = FALSE";
 
-    public static final String andSchoolIdCondition = "AND school_id = ";
+    public static final String andSchoolIdCondition = " AND school_id = ";
 
-    public static final String whereSchoolIdCondition = "WHERE school_id = ";
+    public static final String whereSchoolIdCondition = " WHERE school_id = ";
 
     public static final String
             [] deletedMatches = new String[]{"wheredeleted=false", "anddeleted=false"};
