@@ -30,7 +30,7 @@ public class UserService {
     }
 
     public void insert(User user) {
-        userMapper.insertSelective(user);
+        userMapper.insert(user);
     }
 
     public void updateLoginMessage(String currentUserName, Date loginTime, String loginIp) {

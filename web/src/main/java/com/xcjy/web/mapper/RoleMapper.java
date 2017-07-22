@@ -10,8 +10,6 @@ public interface RoleMapper {
 
     int insert(Role record);
 
-    int insertSelective(Role record);
-
     Set<Role> getByRoleIds(@Param("ids") List<String> ids);
 
     Role getByRoleName(@Param("name") String roleName);

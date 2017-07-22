@@ -9,8 +9,6 @@ public interface UserMapper {
 
     int insert(User record);
 
-    int insertSelective(User record);
-
     void updateLoginMessage(@Param("username") String username,
                             @Param("loginTime") Date loginTime,
                             @Param("loginIp") String loginIp,

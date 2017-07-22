@@ -37,6 +37,6 @@ public class RoleService {
         role.setCreateTime(new Date());
         role.setUpdateTime(new Date());
         role.setDeleted(false);
-        roleMapper.insertSelective(role);
+        roleMapper.insert(role);
     }
 }

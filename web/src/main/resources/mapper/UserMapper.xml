@@ -2,30 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xcjy.web.mapper.UserMapper">
 
-  <resultMap id="BaseResultMap" type="com.xcjy.web.bean.User">
-    <result column="id" jdbcType="VARCHAR" property="id" />
-    <result column="school_id" jdbcType="VARCHAR" property="schoolId" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="user_type" jdbcType="VARCHAR" property="userType" />
-    <result column="entity_id" jdbcType="VARCHAR" property="entityId" />
-    <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="salt" jdbcType="VARCHAR" property="salt" />
-    <result column="role_id" jdbcType="VARCHAR" property="roleId" />
-    <result column="last_login_ip" jdbcType="VARCHAR" property="lastLoginIp" />
-    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="deleted" jdbcType="BIT" property="deleted" />
-  </resultMap>
+    <resultMap id="BaseResultMap" type="com.xcjy.web.bean.User">
+        <result column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="school_id" jdbcType="VARCHAR" property="schoolId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="user_type" jdbcType="VARCHAR" property="userType"/>
+        <result column="entity_id" jdbcType="VARCHAR" property="entityId"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="salt" jdbcType="VARCHAR" property="salt"/>
+        <result column="role_id" jdbcType="VARCHAR" property="roleId"/>
+        <result column="last_login_ip" jdbcType="VARCHAR" property="lastLoginIp"/>
+        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="deleted" jdbcType="BIT" property="deleted"/>
+    </resultMap>
 
-  <sql id="BaseTemplate">
+    <sql id="BaseTemplate">
       id, school_id, name, user_type, entity_id, phone, username,password, salt, role_id,
       last_login_ip, last_login_time, create_time, update_time, deleted
   </sql>
 
-  <insert id="insert" parameterType="com.xcjy.web.bean.User">
+    <insert id="insert" parameterType="com.xcjy.web.bean.User">
     insert into user (id, school_id, name, user_type,
       entity_id, phone, username, 
       password, salt, role_id, 
@@ -38,113 +38,19 @@
       #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT})
   </insert>
 
-  <insert id="insertSelective" parameterType="com.xcjy.web.bean.User">
-    insert into user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="schoolId != null">
-        school_id,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="userType != null">
-        user_type,
-      </if>
-      <if test="entityId != null">
-        entity_id,
-      </if>
-      <if test="phone != null">
-        phone,
-      </if>
-      <if test="username != null">
-        username,
-      </if>
-      <if test="password != null">
-        password,
-      </if>
-      <if test="salt != null">
-        salt,
-      </if>
-      <if test="roleId != null">
-        role_id,
-      </if>
-      <if test="lastLoginIp != null">
-        last_login_ip,
-      </if>
-      <if test="lastLoginTime != null">
-        last_login_time,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
-      <if test="deleted != null">
-        deleted,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="schoolId != null">
-        #{schoolId,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="userType != null">
-        #{userType,jdbcType=VARCHAR},
-      </if>
-      <if test="entityId != null">
-        #{entityId,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="salt != null">
-        #{salt,jdbcType=VARCHAR},
-      </if>
-      <if test="roleId != null">
-        #{roleId,jdbcType=VARCHAR},
-      </if>
-      <if test="lastLoginIp != null">
-        #{lastLoginIp,jdbcType=VARCHAR},
-      </if>
-      <if test="lastLoginTime != null">
-        #{lastLoginTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="deleted != null">
-        #{deleted,jdbcType=BIT},
-      </if>
-    </trim>
-  </insert>
+    <select id="getByUsername" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseTemplate"/>
+        FROM `user` WHERE username = #{username};
+    </select>
 
-  <select id="getByUsername" resultMap="BaseResultMap">
-    SELECT <include refid="BaseTemplate"/> FROM `user` WHERE username = #{username};
-  </select>
+    <select id="getByPhone" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseTemplate"/>
+        FROM `user` WHERE phone = #{phone};
+    </select>
 
-  <select id="getByPhone" resultMap="BaseResultMap">
-    SELECT <include refid="BaseTemplate"/> FROM `user` WHERE phone = #{phone};
-  </select>
-
-  <update id="updateLoginMessage">
+    <update id="updateLoginMessage">
     UPDATE `user` SET last_login_time=#{loginTime}, last_login_ip = #{loginIp}, update_time=#{updateTime} WHERE username=#{username};
   </update>
 
