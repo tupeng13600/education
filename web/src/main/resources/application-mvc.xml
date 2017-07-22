@@ -27,4 +27,6 @@
         <property name="securityManager" ref="securityManager"/>
     </bean>
 
+    <import resource="classpath:spring/application-interceptors.xml" />
+
 </beans>

@@ -1,5 +1,6 @@
 package com.xcjy.web.controller;
 
+import com.xcjy.web.common.SchoolThreadLocal;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,9 @@ public class TestController {
     @GetMapping("/get")
     @RequiresRoles({"teacher"})
     public Map<String, Object> get(){
-        return new HashMap<>();
+        Map<String, Object> jsonObject = new HashMap<>();
+        jsonObject.put("schoolId", SchoolThreadLocal.getSchoolId());
+        return jsonObject;
     }
 
     @GetMapping("/get1")
