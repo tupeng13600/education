@@ -4,6 +4,7 @@
 
   <resultMap id="BaseResultMap" type="com.xcjy.web.bean.User">
     <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="school_id" jdbcType="VARCHAR" property="schoolId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="user_type" jdbcType="VARCHAR" property="userType" />
     <result column="entity_id" jdbcType="VARCHAR" property="entityId" />
@@ -20,17 +21,17 @@
   </resultMap>
 
   <sql id="BaseTemplate">
-      id, name, user_type, entity_id, phone, username,password, salt, role_id,
+      id, school_id, name, user_type, entity_id, phone, username,password, salt, role_id,
       last_login_ip, last_login_time, create_time, update_time, deleted
   </sql>
 
   <insert id="insert" parameterType="com.xcjy.web.bean.User">
-    insert into user (id, name, user_type,
+    insert into user (id, school_id, name, user_type,
       entity_id, phone, username, 
       password, salt, role_id, 
       last_login_ip, last_login_time, create_time, 
       update_time, deleted)
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{userType,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{schoolId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{userType,jdbcType=VARCHAR},
       #{entityId,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, 
       #{lastLoginIp,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
@@ -42,6 +43,9 @@
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
+      </if>
+      <if test="schoolId != null">
+        school_id,
       </if>
       <if test="name != null">
         name,
@@ -87,6 +91,9 @@
       <if test="id != null">
         #{id,jdbcType=VARCHAR},
       </if>
+      <if test="schoolId != null">
+        #{schoolId,jdbcType=VARCHAR},
+      </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
@@ -130,15 +137,15 @@
   </insert>
 
   <select id="getByUsername" resultMap="BaseResultMap">
-    SELECT <include refid="BaseTemplate"/> FROM `user` WHERE username = #{username} AND deleted = FALSE ;
+    SELECT <include refid="BaseTemplate"/> FROM `user` WHERE username = #{username};
   </select>
 
   <select id="getByPhone" resultMap="BaseResultMap">
-    SELECT <include refid="BaseTemplate"/> FROM `user` WHERE phone = #{phone} AND deleted = FALSE ;
+    SELECT <include refid="BaseTemplate"/> FROM `user` WHERE phone = #{phone};
   </select>
 
   <update id="updateLoginMessage">
-    UPDATE `user` SET last_login_time=#{loginTime}, last_login_ip = #{loginIp}, update_time=#{updateTime} WHERE username = #{username} AND deleted = FALSE ;
+    UPDATE `user` SET last_login_time=#{loginTime}, last_login_ip = #{loginIp}, update_time=#{updateTime} WHERE username=#{username};
   </update>
 
 </mapper>

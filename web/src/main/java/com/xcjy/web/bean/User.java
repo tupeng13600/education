@@ -7,6 +7,8 @@ import java.util.Date;
 public class User {
     private String id;
 
+    private String schoolId;
+
     private String name;
 
     private String userType;
