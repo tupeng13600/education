@@ -13,7 +13,7 @@ import java.util.UUID;
 /**
  * Created by tupeng on 2017/7/22.
  * <p>
- * mybatis 拦截器，统一对sql进行处理
+ * mybatis 拦截器，统新增操作添加id
  */
 @Intercepts({@Signature(method = "update", type = Executor.class, args = {MappedStatement.class, Object.class})})
 public class MybatisUpdateInterceptors implements Interceptor {
