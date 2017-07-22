@@ -35,8 +35,8 @@ public class StudentController {
     }
 
     @GetMapping
-    public List<Student> list(@RequestParam(required = false) String schoolId) {
-        return studentService.list(schoolId);
+    public List<Student> list() {
+        return studentService.list();
     }
 
 }

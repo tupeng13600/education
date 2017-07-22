@@ -35,8 +35,8 @@ public class EmployeeController {
     }
 
     @GetMapping
-    public List<Employee> list(@RequestParam(required = false) String schoolId){
-        return employeeService.list(schoolId);
+    public List<Employee> list(){
+        return employeeService.list();
     }
 
 }

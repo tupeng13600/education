@@ -14,8 +14,6 @@ public interface StudentMapper {
 
     void deleteLogic(@Param("id") String id, @Param("updateTime")Date updateTime);
 
-    List<Student> listBySchoolId(@Param("schoolId") String schoolId);
-
     List<Student> listAll();
 
     Student getById(@Param("id") String id);

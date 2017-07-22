@@ -9,8 +9,6 @@ import java.util.List;
 public interface EmployeeMapper {
     int insert(Employee record);
 
-    List<Employee> getBySchoolId(@Param("schoolId") String schoolId);
-
     List<Employee> getAll();
 
     void update(@Param("employee") Employee employee);

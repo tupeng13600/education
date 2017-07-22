@@ -45,10 +45,6 @@
       )
   </insert>
 
-    <select id="getBySchoolId" resultMap="BaseResultMap">
-        SELECT <include refid="baseSql"/> FROM employee WHERE school_id = #{schoolId}
-    </select>
-
     <select id="getAll" resultMap="BaseResultMap">
         SELECT <include refid="baseSql"/> FROM employee
     </select>

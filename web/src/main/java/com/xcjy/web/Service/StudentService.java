@@ -45,7 +45,7 @@ public class StudentService {
         studentMapper.deleteLogic(id, new Date());
     }
 
-    public List<Student> list(String schoolId) {
-        return StringUtils.isNotBlank(schoolId) ? studentMapper.listBySchoolId(schoolId) : studentMapper.listAll();
+    public List<Student> list() {
+        return studentMapper.listAll();
     }
 }

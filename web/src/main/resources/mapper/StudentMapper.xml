@@ -72,10 +72,6 @@
         UPDATE student SET deleted = TRUE, update_time = #{updateTime} WHERE id = #{id}
     </update>
 
-    <select id="listBySchoolId" resultMap="BaseResultMap">
-        SELECT <include refid="baseSql"/> FROM student WHERE school_id = #{schoolId};
-    </select>
-
     <select id="listAll" resultMap="BaseResultMap">
         SELECT <include refid="baseSql"/> FROM student;
     </select>

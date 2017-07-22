@@ -10,7 +10,6 @@ import com.xcjy.web.controller.req.EmployeeUpdateReq;
 import com.xcjy.web.mapper.EmployeeMapper;
 import com.xcjy.web.mapper.UserMapper;
 import com.xcjy.web.util.DateUtil;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.util.SimpleByteSource;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,13 +33,14 @@ public class EmployeeService {
 
     /**
      * 创建employee，user， user默认密码为用户名
+     *
      * @param req
      */
     public void create(EmployeeCreateReq req) {
         //创建Employee
         Employee employee = new Employee();
         BeanUtils.copyProperties(req, employee);
-        if(null == employee.getBirthday()) {
+        if (null == employee.getBirthday()) {
             employee.setBirthday(DateUtil.getBirthByIdCard(employee.getIdCard()));
         }
         employeeMapper.insert(employee);
@@ -62,19 +62,20 @@ public class EmployeeService {
 
     /**
      * 更新employee信息
+     *
      * @param req
      */
     @Transactional
     public void update(EmployeeUpdateReq req) {
         Employee employee = employeeMapper.getById(req.getId());
-        if(null == employee) {
+        if (null == employee) {
             throw new EducationException("员工信息不存在");
         }
         BeanUtils.copyProperties(req, employee);
         employee.setUpdateTime(new Date());
         employeeMapper.update(employee);
         User user = userMapper.getByEntityId(UserType.EMPLOYEE, req.getId());
-        if(null == user) {
+        if (null == user) {
             throw new EducationException("用户账号信息不存在");
         }
         user.setName(req.getName());
@@ -85,17 +86,18 @@ public class EmployeeService {
 
     /**
      * 删除Employee信息
+     *
      * @param id
      */
     @Transactional
     public void deleted(String id) {
         Employee employee = employeeMapper.getById(id);
-        if(null == employee) {
+        if (null == employee) {
             throw new EducationException("员工信息不存在");
         }
         employeeMapper.deleteLogic(id, new Date());
         User user = userMapper.getByEntityId(UserType.EMPLOYEE, id);
-        if(null == user) {
+        if (null == user) {
             throw new EducationException("用户账号信息不存在");
         }
         userMapper.deleteLogic(user.getId(), new Date());
@@ -103,14 +105,11 @@ public class EmployeeService {
 
     /**
      * 获取员工列表
-     * @param schoolId
+     *
      * @return
      */
-    public List<Employee> list(String schoolId) {
-        if(StringUtils.isBlank(schoolId)) {
-            return employeeMapper.getAll();
-        }
-        return employeeMapper.getBySchoolId(schoolId);
+    public List<Employee> list() {
+        return employeeMapper.getAll();
     }
 
 }
