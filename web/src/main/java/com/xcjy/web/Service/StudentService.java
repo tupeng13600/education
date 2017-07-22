@@ -5,6 +5,7 @@ import com.xcjy.web.common.exception.EducationException;
 import com.xcjy.web.controller.req.StudentCreateReq;
 import com.xcjy.web.controller.req.StudentUpdateReq;
 import com.xcjy.web.mapper.StudentMapper;
+import com.xcjy.web.util.DateUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class StudentService {
     public void create(StudentCreateReq req) {
         Student student = new Student();
         BeanUtils.copyProperties(req, student);
+        if(null == student.getBirthday()) {
+            student.setBirthday(DateUtil.getBirthByIdCard(student.getIdCard()));
+        }
         studentMapper.insert(student);
     }
 

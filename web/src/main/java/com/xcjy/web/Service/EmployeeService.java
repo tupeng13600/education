@@ -9,6 +9,7 @@ import com.xcjy.web.controller.req.EmployeeCreateReq;
 import com.xcjy.web.controller.req.EmployeeUpdateReq;
 import com.xcjy.web.mapper.EmployeeMapper;
 import com.xcjy.web.mapper.UserMapper;
+import com.xcjy.web.util.DateUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.util.SimpleByteSource;
 import org.springframework.beans.BeanUtils;
@@ -39,6 +40,9 @@ public class EmployeeService {
         //创建Employee
         Employee employee = new Employee();
         BeanUtils.copyProperties(req, employee);
+        if(null == employee.getBirthday()) {
+            employee.setBirthday(DateUtil.getBirthByIdCard(employee.getIdCard()));
+        }
         employeeMapper.insert(employee);
         //创建user
         User user = new User();
