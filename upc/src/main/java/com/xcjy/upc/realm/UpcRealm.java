@@ -48,7 +48,6 @@ public class UpcRealm extends AuthorizingRealm {
             return new SimpleAuthorizationInfo();
         }
         Set<String> roles = authMessageService.getRole(principal);
-
         return new SimpleAuthorizationInfo(roles);
     }
 

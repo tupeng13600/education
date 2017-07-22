@@ -11,6 +11,10 @@
         <result column="deleted" jdbcType="BIT" property="deleted"/>
     </resultMap>
 
+    <sql id="BaseSql">
+        id, name, remark, create_time, update_time, deleted
+    </sql>
+
     <insert id="insert" parameterType="com.xcjy.web.bean.Role">
     insert into role (id, name, remark, 
       create_time, update_time, deleted
@@ -63,4 +67,16 @@
             </if>
         </trim>
     </insert>
+
+    <select id="getByRoleIds" resultMap="BaseResultMap">
+        SELECT <include refid="BaseSql"/> FROM role WHERE id IN
+        <foreach collection="ids" open="(" separator="," close=")" item="id">
+            #{id}
+        </foreach>
+    </select>
+
+    <select id="getByRoleName" resultMap="BaseResultMap">
+        SELECT <include refid="BaseSql"/> FROM role WHERE name = #{name} AND deleted = FALSE ;
+    </select>
+
 </mapper>

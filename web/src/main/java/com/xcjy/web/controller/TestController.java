@@ -16,13 +16,13 @@ import java.util.Map;
 public class TestController {
 
     @GetMapping("/get")
-    @RequiresRoles({"ceshi"})
+    @RequiresRoles({"teacher"})
     public Map<String, Object> get(){
         return new HashMap<>();
     }
 
     @GetMapping("/get1")
-    @RequiresRoles({"ceshi2"})
+    @RequiresRoles({"student"})
     public Map<String, Object> get1(){
         return new HashMap<>();
     }
