@@ -38,7 +38,11 @@
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>-->
 
-        <table tableName="employee" domainObjectName="Employee"
+        <!--<table tableName="employee" domainObjectName="Employee"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>-->
+
+        <table tableName="school" domainObjectName="School"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
     </context>
