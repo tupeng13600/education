@@ -1,17 +1,14 @@
 package com.xcjy.web.controller;
 
-import com.xcjy.upc.util.UpcSecurityUtil;
 import com.xcjy.web.Service.UserService;
 import com.xcjy.web.bean.User;
 import com.xcjy.web.common.exception.EducationException;
-import com.xcjy.web.controller.req.LoginReq;
 import com.xcjy.web.controller.req.RegisterReq;
-import org.apache.shiro.util.SimpleByteSource;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by tupeng on 2017/7/18.
@@ -34,18 +31,7 @@ public class UserController {
         if (null != user) {
             throw new EducationException("用户名或手机号码已经被占用");
         }
-        User regUser = new User();
-        BeanUtils.copyProperties(req, regUser);
-        regUser.setId(UpcSecurityUtil.randomString());
-        regUser.setCreateTime(new Date());
-        regUser.setUpdateTime(new Date());
-        regUser.setLastLoginIp("0.0.0.0");
-        regUser.setLastLoginTime(new Date());
-        regUser.setDeleted(false);
-        regUser.setSalt(UpcSecurityUtil.randomString());
-        regUser.setPassword(UpcSecurityUtil.encryptPwd(req.getPassword(), new SimpleByteSource(regUser.getSalt())));
-        regUser.setRoleId("1");
-        userService.insert(regUser);
+        userService.insert(req);
     }
 
 }

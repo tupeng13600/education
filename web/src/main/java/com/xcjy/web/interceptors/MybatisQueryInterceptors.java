@@ -7,17 +7,20 @@ import org.apache.ibatis.executor.statement.RoutingStatementHandler;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.plugin.*;
+import org.apache.ibatis.session.ResultHandler;
 
-import java.sql.Connection;
+import java.sql.Statement;
+import java.util.Map;
 import java.util.Properties;
+import java.util.UUID;
 
 /**
  * Created by tupeng on 2017/7/22.
  * <p>
  * mybatis 拦截器，统一对sql进行处理
  */
-@Intercepts({@Signature(method = "prepare", type = StatementHandler.class, args = {Connection.class, Integer.class})})
-public class MybatisInterceptors implements Interceptor {
+@Intercepts({@Signature(method = "query", type = StatementHandler.class, args = {Statement.class, ResultHandler.class})})
+public class MybatisQueryInterceptors implements Interceptor {
 
     public static final String whereCondition = " WHERE deleted = FALSE";
 
@@ -27,11 +30,10 @@ public class MybatisInterceptors implements Interceptor {
 
     public static final String whereSchoolIdCondition = "WHERE school_id = ";
 
-    public static final String[] deletedMatches = new String[]{"wheredeleted=false", "anddeleted=false"};
+    public static final String
+            [] deletedMatches = new String[]{"wheredeleted=false", "anddeleted=false"};
 
     public static final String sqlSuffix = ";";
-
-
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
@@ -43,11 +45,26 @@ public class MybatisInterceptors implements Interceptor {
         return invocation.proceed();
     }
 
+    private boolean insert(Invocation invocation) {
+        Object[] args = invocation.getArgs();
+        if (null != args && args.length > 0) {
+            for (Object arg : args) {
+                if (arg instanceof Map) {
+                    Map<String, Object> argMap = (Map<String, Object>) arg;
+                    String id = UUID.randomUUID().toString().replaceAll("-", "");
+                    argMap.put("id", id);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     private String appendSchoolId(String sql) {
         sql = replaceEndOfSql(sql);
         String schoolId = SchoolThreadLocal.getSchoolId();
-        if(StringUtils.isNotBlank(schoolId)) {
-            if(sql.toLowerCase().contains("where")) {
+        if (StringUtils.isNotBlank(schoolId)) {
+            if (sql.toLowerCase().contains("where")) {
                 return sql + andSchoolIdCondition + "'" + schoolId + "'";
             } else {
                 return sql + whereSchoolIdCondition + "'" + schoolId + "'";
@@ -58,8 +75,8 @@ public class MybatisInterceptors implements Interceptor {
 
     private String appendDeleted(String sql) {
         sql = replaceEndOfSql(sql);
-        if(!matches(sql)) {
-            if(sql.toLowerCase().contains("where")) {
+        if (!matches(sql)) {
+            if (sql.toLowerCase().contains("where")) {
                 sql += andCondition;
             } else {
                 sql += whereCondition;
@@ -78,8 +95,8 @@ public class MybatisInterceptors implements Interceptor {
 
     private Boolean matches(String sql) {
         String tempSql = sql.replaceAll(" ", "").toLowerCase();
-        for(String match : deletedMatches) {
-            if(tempSql.contains(match)) {
+        for (String match : deletedMatches) {
+            if (tempSql.contains(match)) {
                 return true;
             }
         }

@@ -3,6 +3,7 @@
 <configuration>
     <!-- 拦截器翻页时使用 支持oracle 和 mysql 数据库 通过databaseType来区分 -->
     <plugins>
-        <plugin interceptor="com.xcjy.web.interceptors.MybatisInterceptors" />
+        <plugin interceptor="com.xcjy.web.interceptors.MybatisQueryInterceptors" />
+        <plugin interceptor="com.xcjy.web.interceptors.MybatisUpdateInterceptors" />
     </plugins>
 </configuration>

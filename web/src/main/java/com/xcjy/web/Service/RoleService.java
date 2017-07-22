@@ -1,6 +1,5 @@
 package com.xcjy.web.Service;
 
-import com.xcjy.upc.util.UpcSecurityUtil;
 import com.xcjy.web.bean.Role;
 import com.xcjy.web.common.exception.EducationException;
 import com.xcjy.web.controller.req.RoleCreateReq;
@@ -31,7 +30,6 @@ public class RoleService {
             throw new EducationException("角色名称已存在");
         }
         role = new Role();
-        role.setId(UpcSecurityUtil.randomString());
         role.setName(req.getRoleName());
         role.setRemark(req.getRemark());
         role.setCreateTime(new Date());
