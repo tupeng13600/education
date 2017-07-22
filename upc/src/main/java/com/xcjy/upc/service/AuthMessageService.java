@@ -6,7 +6,7 @@ import com.xcjy.upc.model.UpcUser;
 import java.util.Set;
 
 /**
- * Created by 22670 on 2017/7/17.
+ * Created by tupeng on 2017/7/17.
  */
 public interface AuthMessageService {
 

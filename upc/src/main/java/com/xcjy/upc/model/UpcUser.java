@@ -3,7 +3,7 @@ package com.xcjy.upc.model;
 import java.io.Serializable;
 
 /**
- * Created by 22670 on 2017/7/17.
+ * Created by tupeng on 2017/7/17.
  */
 public class UpcUser implements Serializable {
 

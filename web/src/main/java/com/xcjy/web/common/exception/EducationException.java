@@ -1,7 +1,7 @@
 package com.xcjy.web.common.exception;
 
 /**
- * Created by 22670 on 2017/7/18.
+ * Created by tupeng on 2017/7/18.
  */
 public class EducationException  extends RuntimeException  {
 

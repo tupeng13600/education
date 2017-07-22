@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Created by 22670 on 2017/7/22.
+ * Created by tupeng on 2017/7/22.
  */
 public class BaseMessageInterceptor implements HandlerInterceptor {
 

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * Created by 22670 on 2017/7/18.
+ * Created by tupeng on 2017/7/18.
  */
 @ControllerAdvice
 public class EducationExceptionHandler {

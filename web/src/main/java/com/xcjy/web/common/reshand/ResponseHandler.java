@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 /**
- * Created by 22670 on 2017/7/18.
+ * Created by tupeng on 2017/7/18.
  */
 @ControllerAdvice
 public class ResponseHandler implements ResponseBodyAdvice<Object> {

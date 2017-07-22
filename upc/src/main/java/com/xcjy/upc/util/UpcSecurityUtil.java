@@ -6,7 +6,7 @@ import org.apache.shiro.util.ByteSource;
 import java.util.UUID;
 
 /**
- * Created by 22670 on 2017/7/17.
+ * Created by tupeng on 2017/7/17.
  */
 public class UpcSecurityUtil {
 

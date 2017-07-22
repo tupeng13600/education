@@ -3,7 +3,7 @@ package com.xcjy.upc.token;
 import org.apache.shiro.authc.AuthenticationToken;
 
 /**
- * Created by 22670 on 2017/7/16.
+ * Created by tupeng on 2017/7/16.
  */
 public class UpcToken implements AuthenticationToken {
 

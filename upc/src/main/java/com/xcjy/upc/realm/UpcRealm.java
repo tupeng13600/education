@@ -17,7 +17,7 @@ import org.springframework.util.StringUtils;
 import java.util.Set;
 
 /**
- * Created by 22670 on 2017/7/16.
+ * Created by tupeng on 2017/7/16.
  */
 public class UpcRealm extends AuthorizingRealm {
     private static final Logger LOGGER = LoggerFactory.getLogger(UpcRealm.class);

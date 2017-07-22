@@ -12,7 +12,7 @@ import java.sql.Connection;
 import java.util.Properties;
 
 /**
- * Created by 22670 on 2017/7/22.
+ * Created by tupeng on 2017/7/22.
  * <p>
  * mybatis 拦截器，统一对sql进行处理
  */

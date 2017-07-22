@@ -3,7 +3,7 @@ package com.xcjy.upc.util;
 import org.apache.shiro.SecurityUtils;
 
 /**
- * Created by 22670 on 2017/7/21.
+ * Created by tupeng on 2017/7/21.
  */
 public abstract class UserUtil {
 

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Created by 22670 on 2017/7/19.
+ * Created by tupeng on 2017/7/19.
  */
 @RestController
 public class UpcValidController {
