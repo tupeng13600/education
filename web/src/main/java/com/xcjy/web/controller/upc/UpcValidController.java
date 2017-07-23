@@ -1,10 +1,8 @@
 package com.xcjy.web.controller.upc;
 
+import com.xcjy.upc.util.UserUtil;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -13,9 +11,15 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class UpcValidController {
 
-    @GetMapping("/upc/login")
-    public ModelAndView valid(){
-        return new ModelAndView("index");
+    @RequestMapping("/upc/login")
+    public String valid(){
+        return "redirect:/index";
+    }
+
+    @RequestMapping("/upc/logout")
+    public ModelAndView logout(){
+        UserUtil.logout();
+        return new ModelAndView("login");
     }
 
 }

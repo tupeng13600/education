@@ -10,12 +10,10 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <mvc:exclude-mapping path="/plugins/**"/>
             <bean class="com.xcjy.web.interceptors.BaseMessageInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <mvc:exclude-mapping path="/plugins/**"/>
             <bean class="com.xcjy.web.interceptors.IsLoginInterceptors"/>
         </mvc:interceptor>
     </mvc:interceptors>

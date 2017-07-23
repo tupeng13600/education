@@ -68,91 +68,16 @@
                 <ul class="nav navbar-nav">
                     <!-- 通知栏 -->
                     <li class="dropdown tasks-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="#">
                             <i class="fa fa-flag-o"></i>
                             <span class="label label-danger">9</span>
                         </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 9 tasks</li>
-                            <li>
-                                <!-- inner menu: contains the actual data -->
-                                <ul class="menu">
-                                    <li><!-- Task item -->
-                                        <a href="#">
-                                            <h3>
-                                                Design some buttons
-                                                <small class="pull-right">20%</small>
-                                            </h3>
-                                            <div class="progress xs">
-                                                <div class="progress-bar progress-bar-aqua" style="width: 20%"
-                                                     role="progressbar"
-                                                     aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">20% Complete</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <!-- end task item -->
-                                    <li><!-- Task item -->
-                                        <a href="#">
-                                            <h3>
-                                                Create a nice theme
-                                                <small class="pull-right">40%</small>
-                                            </h3>
-                                            <div class="progress xs">
-                                                <div class="progress-bar progress-bar-green" style="width: 40%"
-                                                     role="progressbar"
-                                                     aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">40% Complete</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <!-- end task item -->
-                                    <li><!-- Task item -->
-                                        <a href="#">
-                                            <h3>
-                                                Some task I need to do
-                                                <small class="pull-right">60%</small>
-                                            </h3>
-                                            <div class="progress xs">
-                                                <div class="progress-bar progress-bar-red" style="width: 60%"
-                                                     role="progressbar"
-                                                     aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">60% Complete</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <!-- end task item -->
-                                    <li><!-- Task item -->
-                                        <a href="#">
-                                            <h3>
-                                                Make beautiful transitions
-                                                <small class="pull-right">80%</small>
-                                            </h3>
-                                            <div class="progress xs">
-                                                <div class="progress-bar progress-bar-yellow" style="width: 80%"
-                                                     role="progressbar"
-                                                     aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">80% Complete</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <!-- end task item -->
-                                </ul>
-                            </li>
-                            <li class="footer">
-                                <a href="#">View all tasks</a>
-                            </li>
-                        </ul>
                     </li>
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="../img/header.png" class="user-image" alt="User Image">
-                            <span class="hidden-xs">系统管理员</span>
+                            <span class="hidden-xs">${user.name}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
@@ -173,7 +98,7 @@
                                 <!--<a href="#" class="btn btn-default btn-flat">Profile</a>-->
                                 <!--</div>-->
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">登出</a>
+                                    <a href="${pageContext.request.contextPath}/upc/logout" class="btn btn-default btn-flat">登出</a>
                                 </div>
                             </li>
                         </ul>
@@ -196,7 +121,7 @@
                     <img src="../img/header.png" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>系统管理员</p>
+                    <p>${user.name}</p>
                     <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
                 </div>
             </div>

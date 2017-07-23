@@ -6,9 +6,9 @@
 
     <mvc:annotation-driven/>
 
-    <mvc:default-servlet-handler/>
-
-    <mvc:resources location="/WEB-INF/plugins/" mapping="/plugins/**"/>
+    <!--<mvc:default-servlet-handler/>-->
+    <mvc:resources mapping="/plugins/**" location="/WEB-INF/plugins/" />
+    <mvc:resources mapping="/img/**" location="/WEB-INF/img/" />
 
     <context:component-scan base-package="com.xcjy.web.controller">
         <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.RestController"/>

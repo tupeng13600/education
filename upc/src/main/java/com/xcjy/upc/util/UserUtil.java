@@ -15,4 +15,8 @@ public abstract class UserUtil {
         return (String) SecurityUtils.getSubject().getPrincipal();
     }
 
+    public static void logout(){
+        SecurityUtils.getSubject().logout();
+    }
+
 }

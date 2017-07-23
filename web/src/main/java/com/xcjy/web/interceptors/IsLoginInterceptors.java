@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class IsLoginInterceptors implements HandlerInterceptor {
 
+    private static final String loginUri = "/upc/login";
+
     private static Logger logger = LoggerFactory.getLogger(IsLoginInterceptors.class);
 
     @Override
@@ -27,7 +29,7 @@ public class IsLoginInterceptors implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object o, ModelAndView modelAndView) throws Exception {
         String username = UserUtil.getCurrentUserName();
-        if(StringUtils.isBlank(username)) {
+        if (StringUtils.isBlank(username) && null != modelAndView) {
             modelAndView.setViewName("login");
         }
     }

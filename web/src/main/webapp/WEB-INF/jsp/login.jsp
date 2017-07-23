@@ -43,7 +43,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">请登录</p>
 
-    <form action="/api/upc/login" method="post">
+    <form action="${pageContext.request.contextPath}/upc/login" method="post">
       <div class="form-group has-feedback">
         <input type="username" name="username" class="form-control" placeholder="用户名">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

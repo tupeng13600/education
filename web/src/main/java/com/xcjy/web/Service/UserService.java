@@ -21,6 +21,10 @@ public class UserService {
     @Autowired
     private UserMapper userMapper;
 
+    public User getByUsername(String username) {
+        return userMapper.getByUsername(username);
+    }
+
     public User getByUsernameOrPhone(String username, String phone) {
         User user = null;
         if (StringUtils.isNotBlank(username)) {

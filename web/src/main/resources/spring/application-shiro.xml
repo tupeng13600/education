@@ -11,4 +11,16 @@
         <constructor-arg name="authMessageService" ref="authService"/>
     </bean>
 
+    <bean id="shiroFilter" class="com.xcjy.upc.UpcFilterFactoryBean">
+        <constructor-arg name="upcSecurityManager" ref="securityManager"/>
+        <constructor-arg name="authMessageService" ref="authService"/>
+        <constructor-arg name="defineFilterChain">
+            <list>
+
+            </list>
+        </constructor-arg>
+    </bean>
+
+
+
 </beans>
