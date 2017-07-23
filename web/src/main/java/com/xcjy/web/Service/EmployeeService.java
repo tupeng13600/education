@@ -115,4 +115,8 @@ public class EmployeeService {
         return employeeMapper.getAll();
     }
 
+    public Integer getCount() {
+        return employeeMapper.getCount();
+    }
+
 }

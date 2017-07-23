@@ -59,16 +59,16 @@
                 </table>
             </div>
             <!-- /.box-body -->
-            <div class="box-footer clearfix">
-                <ul class="pagination pagination-sm no-margin pull-right">
-                    <li class="active"><a href="#">«</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">»</a></li>
-                </ul>
-            </div>
+            <c:if test="${not empty page.totalCount}">
+                <div class="box-footer clearfix">
+                    <ul id="page-btn-container" class="pagination pagination-sm no-margin pull-right"
+                        data-totalCount="${page.totalCount}" data-page="${page.page}" data-pageSize="${page.pageSize}"
+                    update-url="${pageContext.request.contextPath}/view/employee/">
+                    </ul>
+                </div>
+            </c:if>
         </div>
         <!-- /.box -->
     </div>
 </section>
+<script src="../../js/page.js"></script>

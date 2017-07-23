@@ -41,4 +41,8 @@ public class XcjyThreadLocal {
         return totalCountThreadLocal.get();
     }
 
+    public static void removePage(){
+        pageThreadLocal.remove();
+    }
+
 }

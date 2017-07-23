@@ -1,6 +1,7 @@
 package com.xcjy.web.interceptors;
 
 import com.xcjy.web.common.XcjyThreadLocal;
+import com.xcjy.web.controller.req.Page;
 import com.xcjy.web.util.ReflectUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.executor.statement.RoutingStatementHandler;
@@ -20,27 +21,48 @@ import java.util.Properties;
 @Intercepts({@Signature(method = "query", type = StatementHandler.class, args = {Statement.class, ResultHandler.class})})
 public class MybatisQueryInterceptors implements Interceptor {
 
-    public static final String whereCondition = " WHERE deleted = FALSE";
+    private static final String whereCondition = " WHERE deleted = FALSE";
+
+    private static final Integer defaultPageSize = 20;
 
     private static final String andCondition = " AND deleted = FALSE";
 
-    public static final String andSchoolIdCondition = " AND school_id = ";
+    private static final String andSchoolIdCondition = " AND school_id = ";
 
-    public static final String whereSchoolIdCondition = " WHERE school_id = ";
+    private static final String whereSchoolIdCondition = " WHERE school_id = ";
 
-    public static final String
+    private static final String
             [] deletedMatches = new String[]{"wheredeleted=false", "anddeleted=false"};
 
-    public static final String sqlSuffix = ";";
+    private static final String sqlSuffix = ";";
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
         RoutingStatementHandler handler = (RoutingStatementHandler) invocation.getTarget();
         StatementHandler delegate = (StatementHandler) ReflectUtil.getProperty(handler, "delegate");
         BoundSql boundSql = delegate.getBoundSql();
-        String sql = appendDeleted(appendSchoolId(boundSql.getSql()));
+        String sql = getPageSql(appendDeleted(appendSchoolId(boundSql.getSql())));
         ReflectUtil.setProperty(boundSql, "sql", sql);
         return invocation.proceed();
+    }
+
+    private String getPageSql(String sql){
+        StringBuilder builder = new StringBuilder(replaceEndOfSql(sql));
+        Page page = XcjyThreadLocal.getPage();
+        if(null == page) {
+            return sql;
+        }
+        Integer pageIndex = 0;
+        Integer pageSize = defaultPageSize;
+        if(null != page.getPage() && page.getPage() > 0) {
+            pageIndex = page.getPage() - 1;
+        }
+        if(null != page.getPageSize() && page.getPageSize() > 0) {
+            pageSize = page.getPageSize();
+            pageIndex = pageIndex * pageSize;
+        }
+        XcjyThreadLocal.removePage();
+        return builder.append(" LIMIT ").append(pageIndex.toString()).append(", ").append(pageSize.toString()).append(" ; ").toString();
     }
 
     private String appendSchoolId(String sql) {

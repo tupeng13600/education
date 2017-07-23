@@ -26,7 +26,11 @@ public class EmployeeViewController {
     @RequestMapping("/employee/list")
     public ModelAndView show(@ModelAttribute Page page){
         List<Employee> employeeList = employeeService.list(page);
-        return new ModelAndView("user/employee").addObject("employeeList", employeeList).addObject("totalCount", XcjyThreadLocal.getTotalCount());
+        Integer count = employeeService.getCount();
+        page.setTotalCount(count);
+        return new ModelAndView("user/employee")
+                .addObject("employeeList", employeeList)
+                .addObject("page", page);
     }
 
 }

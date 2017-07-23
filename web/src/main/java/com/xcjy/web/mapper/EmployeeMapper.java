@@ -1,6 +1,7 @@
 package com.xcjy.web.mapper;
 
 import com.xcjy.web.bean.Employee;
+import com.xcjy.web.controller.req.Page;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -16,4 +17,7 @@ public interface EmployeeMapper {
     Employee getById(@Param("id") String id);
 
     void deleteLogic(@Param("id") String id, @Param("updateTime") Date updateTime);
+
+    Integer getCount();
+
 }
