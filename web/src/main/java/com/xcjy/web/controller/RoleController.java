@@ -2,7 +2,6 @@ package com.xcjy.web.controller;
 
 import com.xcjy.web.Service.RoleService;
 import com.xcjy.web.controller.req.RoleCreateReq;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by tupeng on 2017/7/22.
  */
 @RestController
-@RequestMapping("/role")
+@RequestMapping("/api/role")
 public class RoleController {
 
     @Autowired

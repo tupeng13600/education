@@ -13,7 +13,7 @@ import java.util.List;
  * Created by tupeng on 2017/7/22.
  */
 @RestController
-@RequestMapping("/student")
+@RequestMapping("/api/student")
 public class StudentController {
 
     @Autowired

@@ -13,7 +13,7 @@ import java.util.Map;
  * Created by tupeng on 2017/7/19.
  */
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/api/test")
 public class TestController {
 
     @GetMapping("/get")
