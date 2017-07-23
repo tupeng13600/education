@@ -1,6 +1,7 @@
 package com.xcjy.web.controller;
 
 import com.xcjy.web.Service.RoleService;
+import com.xcjy.web.controller.req.RoleCreateBatchReq;
 import com.xcjy.web.controller.req.RoleCreateReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,13 @@ public class RoleController {
     @PostMapping
     public void create(@RequestBody RoleCreateReq req) {
         roleService.create(req);
+    }
+
+    @PostMapping("/batch")
+    public void createBatch(@RequestBody RoleCreateBatchReq req) {
+        for(RoleCreateReq role : req.getRoleList()) {
+            roleService.create(role);
+        }
     }
 
 }

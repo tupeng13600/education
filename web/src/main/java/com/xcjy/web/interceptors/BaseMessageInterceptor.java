@@ -3,7 +3,7 @@ package com.xcjy.web.interceptors;
 import com.xcjy.upc.util.UserUtil;
 import com.xcjy.web.Service.UserService;
 import com.xcjy.web.bean.User;
-import com.xcjy.web.common.SchoolThreadLocal;
+import com.xcjy.web.common.XcjyThreadLocal;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -34,7 +34,7 @@ public class BaseMessageInterceptor implements HandlerInterceptor {
         if (StringUtils.isNotBlank(username)) {
             User user = userService.getByUsernameOrPhone(username, username);
             if (null != user) {
-                SchoolThreadLocal.setSchoolId(user.getSchoolId());
+                XcjyThreadLocal.setSchoolId(user.getSchoolId());
             }
         }
         return true;

@@ -145,7 +145,7 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="index2.html"><i class="fa fa-circle-o"></i>员工管理</a></li>
+                        <li><a href="#" onclick="getPage('/view/employee/list?page=1&pageSize=10','get')"><i class="fa fa-circle-o"></i>员工管理</a></li>
                         <li><a href="index2.html"><i class="fa fa-circle-o"></i>用户管理</a></li>
                         <li><a href="index2.html"><i class="fa fa-circle-o"></i>角色管理</a></li>
                     </ul>
@@ -157,23 +157,8 @@
     </aside>
 
     <!-- 内容 -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                Dashboard
-                <small>Control panel</small>
-            </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Dashboard</li>
-            </ol>
-        </section>
+    <div id="xcjy-main-content" class="content-wrapper">
 
-        <!-- 这是内容 -->
-        <section class="content">
-            内容
-        </section>
         <!-- /.content -->
     </div>
     <!-- 页脚 -->
@@ -225,6 +210,8 @@
 <script src="../plugins/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../plugins/dist/js/demo.js"></script>
+
+<script src="../js/base.js"></script>
 </body>
 </html>
 

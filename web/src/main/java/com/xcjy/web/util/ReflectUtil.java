@@ -25,6 +25,18 @@ public class ReflectUtil {
         return null;
     }
 
+    public static <T> Object getParentProperty(T t, String propertyName) {
+        Class clss = t.getClass().getSuperclass();
+        try{
+            Field field = clss.getDeclaredField(propertyName);
+            field.setAccessible(true);
+            return field.get(t);
+        } catch (Exception e) {
+            logger.warn("对象：{}， 无法获取属性：{}", t, propertyName);
+        }
+        return null;
+    }
+
     public static <T> void setProperty(T t, String propertyName, Object value) {
         Class clss = t.getClass();
         try{

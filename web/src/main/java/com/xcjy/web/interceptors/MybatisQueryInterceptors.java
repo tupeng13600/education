@@ -1,6 +1,6 @@
 package com.xcjy.web.interceptors;
 
-import com.xcjy.web.common.SchoolThreadLocal;
+import com.xcjy.web.common.XcjyThreadLocal;
 import com.xcjy.web.util.ReflectUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.executor.statement.RoutingStatementHandler;
@@ -10,9 +10,7 @@ import org.apache.ibatis.plugin.*;
 import org.apache.ibatis.session.ResultHandler;
 
 import java.sql.Statement;
-import java.util.Map;
 import java.util.Properties;
-import java.util.UUID;
 
 /**
  * Created by tupeng on 2017/7/22.
@@ -45,24 +43,9 @@ public class MybatisQueryInterceptors implements Interceptor {
         return invocation.proceed();
     }
 
-    private boolean insert(Invocation invocation) {
-        Object[] args = invocation.getArgs();
-        if (null != args && args.length > 0) {
-            for (Object arg : args) {
-                if (arg instanceof Map) {
-                    Map<String, Object> argMap = (Map<String, Object>) arg;
-                    String id = UUID.randomUUID().toString().replaceAll("-", "");
-                    argMap.put("id", id);
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
     private String appendSchoolId(String sql) {
         sql = replaceEndOfSql(sql);
-        String schoolId = SchoolThreadLocal.getSchoolId();
+        String schoolId = XcjyThreadLocal.getSchoolId();
         if (StringUtils.isNotBlank(schoolId)) {
             if (sql.toLowerCase().contains("where")) {
                 return sql + andSchoolIdCondition + "'" + schoolId + "'";

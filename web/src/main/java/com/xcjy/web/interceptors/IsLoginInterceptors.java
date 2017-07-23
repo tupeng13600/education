@@ -1,7 +1,7 @@
 package com.xcjy.web.interceptors;
 
 import com.xcjy.upc.util.UserUtil;
-import com.xcjy.web.common.SchoolThreadLocal;
+import com.xcjy.web.common.XcjyThreadLocal;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +22,7 @@ public class IsLoginInterceptors implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
-        logger.info("User:{},  request uri:{},  schoolId is:{}", UserUtil.getCurrentUserName(), request.getRequestURI(), SchoolThreadLocal.getSchoolId());
+        logger.info("User:{},  request uri:{},  schoolId is:{}", UserUtil.getCurrentUserName(), request.getRequestURI(), XcjyThreadLocal.getSchoolId());
         return true;
     }
 

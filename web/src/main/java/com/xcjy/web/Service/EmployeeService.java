@@ -3,10 +3,12 @@ package com.xcjy.web.Service;
 import com.xcjy.upc.util.UpcSecurityUtil;
 import com.xcjy.web.bean.Employee;
 import com.xcjy.web.bean.User;
+import com.xcjy.web.common.XcjyThreadLocal;
 import com.xcjy.web.common.enums.UserType;
 import com.xcjy.web.common.exception.EducationException;
 import com.xcjy.web.controller.req.EmployeeCreateReq;
 import com.xcjy.web.controller.req.EmployeeUpdateReq;
+import com.xcjy.web.controller.req.Page;
 import com.xcjy.web.mapper.EmployeeMapper;
 import com.xcjy.web.mapper.UserMapper;
 import com.xcjy.web.util.DateUtil;
@@ -108,7 +110,8 @@ public class EmployeeService {
      *
      * @return
      */
-    public List<Employee> list() {
+    public List<Employee> list(Page page) {
+        XcjyThreadLocal.setPage(page);
         return employeeMapper.getAll();
     }
 
