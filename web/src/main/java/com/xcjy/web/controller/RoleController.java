@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by tupeng on 2017/7/22.
  */
 @RestController
-@RequestMapping("/api/role")
+@RequestMapping("/role")
 public class RoleController {
 
     @Autowired

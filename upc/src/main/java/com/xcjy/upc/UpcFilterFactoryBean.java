@@ -4,6 +4,7 @@ import com.xcjy.upc.filter.UpcAuthFilter;
 import com.xcjy.upc.filter.UpcLoginFilter;
 import com.xcjy.upc.manager.UpcSecurityManager;
 import com.xcjy.upc.service.AuthMessageService;
+import org.apache.commons.collections.MapUtils;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 
 import javax.servlet.Filter;
@@ -16,7 +17,7 @@ import java.util.Map;
  */
 public class UpcFilterFactoryBean extends ShiroFilterFactoryBean {
 
-    public UpcFilterFactoryBean(UpcSecurityManager upcSecurityManager, AuthMessageService authMessageService) {
+    public UpcFilterFactoryBean(UpcSecurityManager upcSecurityManager, AuthMessageService authMessageService, Map<String, String> defineFilterChain) {
         upcSecurityManager.setAuthMessageService(authMessageService);
         setSecurityManager(upcSecurityManager);
 
@@ -25,10 +26,11 @@ public class UpcFilterFactoryBean extends ShiroFilterFactoryBean {
         filterMap.put("upcLogin", new UpcLoginFilter(authMessageService));
         setFilters(filterMap);
         Map<String, String> definitionMap = new LinkedHashMap<>();
-        definitionMap.put("/api/user/**", "anon");
-        definitionMap.put("/page/**", "anon");
-        definitionMap.put("/api/upc/login", "upcLogin");
-        definitionMap.put("/api/**", "upcAuth");
+        if (MapUtils.isNotEmpty(defineFilterChain)) {
+            definitionMap.putAll(defineFilterChain);
+        }
+        definitionMap.put("/upc/login", "upcLogin");
+        definitionMap.put("/**", "upcAuth");
         setFilterChainDefinitionMap(definitionMap);
     }
 }
