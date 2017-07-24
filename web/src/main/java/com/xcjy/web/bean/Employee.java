@@ -1,5 +1,6 @@
 package com.xcjy.web.bean;
 
+import com.xcjy.web.common.enums.SexType;
 import lombok.Data;
 
 import java.util.Date;
@@ -11,7 +12,7 @@ public class Employee {
 
     private String name;
 
-    private String sex;
+    private SexType sex;
 
     private Date birthday;
 
