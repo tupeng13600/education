@@ -29,7 +29,6 @@ public class StudentService {
         BeanUtils.copyProperties(req, student);
         if(null == student.getBirthday()) {
             student.setBirthday(DateUtil.getBirthByIdCard(student.getIdCard()));
-
         }
         studentMapper.insert(student);
     }
