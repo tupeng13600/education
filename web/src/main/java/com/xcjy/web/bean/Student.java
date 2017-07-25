@@ -1,6 +1,7 @@
 package com.xcjy.web.bean;
 
 import com.xcjy.web.common.cache.CacheFactory;
+import com.xcjy.web.common.enums.PayStatusType;
 import com.xcjy.web.common.enums.SexType;
 import com.xcjy.web.util.DateUtil;
 import com.xcjy.web.util.ExcelData;
@@ -45,6 +46,8 @@ public class Student {
     private Date createTime;
 
     private Date updateTime;
+
+    private PayStatusType alreadyPaid;
 
     private Boolean deleted;
 
@@ -222,6 +225,14 @@ public class Student {
 
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public PayStatusType getAlreadyPaid() {
+        return alreadyPaid;
+    }
+
+    public void setAlreadyPaid(PayStatusType alreadyPaid) {
+        this.alreadyPaid = alreadyPaid;
     }
 
     public SexType sexParse(String sex) {

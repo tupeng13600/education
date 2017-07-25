@@ -1,5 +1,6 @@
 package com.xcjy.web.controller.req;
 
+import com.xcjy.web.common.enums.PayStatusType;
 import lombok.Data;
 
 import java.util.Date;
@@ -41,5 +42,7 @@ public class StudentCreateReq {
     private String address;
 
     private String remark;
+
+    private PayStatusType alreadyPaid = PayStatusType.NO;
 
 }

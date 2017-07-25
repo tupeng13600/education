@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xcjy.web.mapper.SchoolMapper">
+
     <resultMap id="BaseResultMap" type="com.xcjy.web.bean.School">
         <result column="id" jdbcType="VARCHAR" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
@@ -38,7 +39,7 @@
     </update>
 
     <select id="getAll" resultMap="BaseResultMap">
-        SELECT<include refid="baseSql"/>;
+        SELECT<include refid="baseSql"/> FROM school
     </select>
 
 </mapper>

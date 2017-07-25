@@ -2,11 +2,13 @@ package com.xcjy.web.interceptors;
 
 import com.xcjy.web.common.enums.DbOperationType;
 import com.xcjy.web.util.ReflectUtil;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlCommandType;
 import org.apache.ibatis.plugin.*;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.Properties;
 import java.util.UUID;
@@ -30,15 +32,30 @@ public class MybatisUpdateInterceptors implements Interceptor {
         if (null != args && args.length > 0 && isInsert(args)) {
             for (Object arg : args) {
                 if (!(arg instanceof MappedStatement)) {
-                    String id = UUID.randomUUID().toString().replaceAll("-", "");
-                    ReflectUtil.setProperty(arg, autoCreateIdKey, id);
-                    ReflectUtil.setProperty(arg, createTimeKey, new Date());
-                    ReflectUtil.setProperty(arg, updateTimeKey, new Date());
-                    ReflectUtil.setProperty(arg, deletedKey, false);
+                    if (arg instanceof Collection) {
+                        Collection collection = (Collection) arg;
+                        if (CollectionUtils.isNotEmpty(collection)) {
+                            for (Object des : collection) {
+                                setInitProperty(des);
+                            }
+                        }
+                    } else {
+                        setInitProperty(arg);
+                    }
                 }
             }
         }
         return invocation.proceed();
+    }
+
+    private void setInitProperty(Object arg) {
+        if (null != arg) {
+            String id = UUID.randomUUID().toString().replaceAll("-", "");
+            ReflectUtil.setProperty(arg, autoCreateIdKey, id);
+            ReflectUtil.setProperty(arg, createTimeKey, new Date());
+            ReflectUtil.setProperty(arg, updateTimeKey, new Date());
+            ReflectUtil.setProperty(arg, deletedKey, false);
+        }
     }
 
     private Boolean isInsert(Object[] args) {

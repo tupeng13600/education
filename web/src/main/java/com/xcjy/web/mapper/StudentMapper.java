@@ -2,6 +2,7 @@ package com.xcjy.web.mapper;
 
 import com.xcjy.web.bean.Student;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
@@ -17,5 +18,7 @@ public interface StudentMapper {
     List<Student> listAll();
 
     Student getById(@Param("id") String id);
+
+    int insertBatch(@Param("students") List<Student> students);
 
 }

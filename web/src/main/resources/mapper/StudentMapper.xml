@@ -21,13 +21,14 @@
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="already_paid" jdbcType="VARCHAR" property="alreadyPaid"/>
         <result column="deleted" jdbcType="BIT" property="deleted"/>
     </resultMap>
 
     <sql id="baseSql">
         id, school_id, name, id_card, sex, orign_school, grade, birthday, subject,
         source, phone, parent_name, parent_sex, parent_id_card, parent_phone, address,
-        remark, create_time, update_time, deleted
+        remark, create_time, update_time, already_paid, deleted
     </sql>
 
     <insert id="insert" parameterType="com.xcjy.web.bean.Student">
@@ -37,15 +38,35 @@
       source, phone, parent_name, 
       parent_sex, parent_id_card, parent_phone, 
       address, remark, create_time, 
-      update_time, deleted)
+      update_time, already_paid, deleted)
     values (#{id,jdbcType=VARCHAR}, #{schoolId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{idCard,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{orignSchool,jdbcType=VARCHAR}, 
       #{grade,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, #{subject,jdbcType=VARCHAR}, 
       #{source,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{parentName,jdbcType=VARCHAR}, 
       #{parentSex,jdbcType=VARCHAR}, #{parentIdCard,jdbcType=VARCHAR}, #{parentPhone,jdbcType=VARCHAR}, 
       #{address,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT})
+      #{updateTime,jdbcType=TIMESTAMP}, #{alreadyPaid}, #{deleted,jdbcType=BIT})
   </insert>
+
+    <insert id="insertBatch">
+        insert into student (id, school_id, name,
+        id_card, sex, orign_school,
+        grade, birthday, subject,
+        source, phone, parent_name,
+        parent_sex, parent_id_card, parent_phone,
+        address, remark, create_time,
+        update_time, already_paid, deleted)
+        values
+        <foreach collection="students" item="student" separator=",">
+            (#{student.id,jdbcType=VARCHAR}, #{student.schoolId,jdbcType=VARCHAR}, #{student.name,jdbcType=VARCHAR},
+            #{student.idCard,jdbcType=VARCHAR}, #{student.sex,jdbcType=VARCHAR}, #{student.orignSchool,jdbcType=VARCHAR},
+            #{student.grade,jdbcType=VARCHAR}, #{student.birthday,jdbcType=DATE}, #{student.subject,jdbcType=VARCHAR},
+            #{student.source,jdbcType=VARCHAR}, #{student.phone,jdbcType=VARCHAR}, #{student.parentName,jdbcType=VARCHAR},
+            #{student.parentSex,jdbcType=VARCHAR}, #{student.parentIdCard,jdbcType=VARCHAR}, #{student.parentPhone,jdbcType=VARCHAR},
+            #{student.address,jdbcType=VARCHAR}, #{student.remark,jdbcType=VARCHAR}, #{student.createTime,jdbcType=TIMESTAMP},
+            #{student.updateTime,jdbcType=TIMESTAMP}, #{student.alreadyPaid}, #{student.deleted,jdbcType=BIT})
+        </foreach>
+    </insert>
 
     <update id="update" parameterType="com.xcjy.web.bean.Student">
         UPDATE student SET
@@ -63,6 +84,7 @@
         parent_id_card = #{parentIdCard},
         parent_phone = #{parentPhone},
         address = #{address},
+        already_paid = #{alreadyPaid},
         remark = #{remark},
         update_time = #{updateTime}
         WHERE id = #{id} AND deleted = FALSE;

@@ -27,9 +27,7 @@ public class ExcelService {
     public void importStudent(MultipartFile file) throws IOException {
         List<Student> students = getStudent(file);
         if (CollectionUtils.isNotEmpty(students)) {
-            for (Student student : students) {
-                studentMapper.insert(student);
-            }
+            studentMapper.insertBatch(students);
         }
     }
 
