@@ -3,6 +3,7 @@ package com.xcjy.web.Service;
 import com.xcjy.web.bean.CounselorStudent;
 import com.xcjy.web.bean.StmanagerStudent;
 import com.xcjy.web.bean.StudentMoney;
+import com.xcjy.web.bean.StudentPayLog;
 import com.xcjy.web.common.enums.CounselorStudentStatusType;
 import com.xcjy.web.common.enums.StudentPayType;
 import com.xcjy.web.common.exception.EducationException;
@@ -12,6 +13,7 @@ import com.xcjy.web.controller.req.StudentPayReq;
 import com.xcjy.web.mapper.CounselorStudentMapper;
 import com.xcjy.web.mapper.StmanagerStudentMapper;
 import com.xcjy.web.mapper.StudentMoneyMapper;
+import com.xcjy.web.mapper.StudentPayLogMapper;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +37,9 @@ public class RelationService {
 
     @Autowired
     private StudentMoneyMapper studentMoneyMapper;
+
+    @Autowired
+    private StudentPayLogMapper studentPayLogMapper;
 
     @Transactional
     public void counselorStudent(CounselorStudentCreateReq req) {
@@ -124,5 +129,15 @@ public class RelationService {
             studentMoney.setUpdateTime(new Date());
             studentMoneyMapper.updateMoney(studentMoney);
         }
+        //添加学生缴费日志
+        StudentPayLog studentPayLog = new StudentPayLog();
+        studentPayLog.setEmployeeId(req.getEmployeeId());
+        studentPayLog.setOpPayType(req.getPayType());
+        studentPayLog.setSchoolId(req.getSchoolId());
+        studentPayLog.setStudentId(req.getStudentId());
+        studentPayLog.setMoney(req.getMoney());
+        studentPayLog.setRemark(req.getRemark());
+        studentPayLogMapper.insert(studentPayLog);
+
     }
 }

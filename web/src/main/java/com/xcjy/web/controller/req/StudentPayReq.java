@@ -19,4 +19,6 @@ public class StudentPayReq {
 
     private Integer money;
 
+    private String remark;
+
 }
