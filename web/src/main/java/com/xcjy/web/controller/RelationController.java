@@ -4,6 +4,7 @@ import com.xcjy.web.Service.RelationService;
 import com.xcjy.web.controller.req.CounselorStudentCreateReq;
 import com.xcjy.web.controller.req.StmanagerStudentCreateReq;
 import com.xcjy.web.controller.req.StudentPayReq;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/relation")
 public class RelationController {
 
+    @Autowired
     private RelationService relationService;
 
     /**
