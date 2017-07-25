@@ -39,7 +39,7 @@ public class RelationController {
      * 学生缴费
      * @param req
      */
-    @PostMapping
+    @PutMapping("/student/pay")
     public void studentPay(@RequestBody StudentPayReq req) {
         relationService.studentPay(req);
     }
