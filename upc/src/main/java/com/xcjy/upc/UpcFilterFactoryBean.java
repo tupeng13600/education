@@ -26,6 +26,12 @@ public class UpcFilterFactoryBean extends ShiroFilterFactoryBean {
         setFilters(filterMap);
         Map<String, String> definitionMap = new LinkedHashMap<>();
         definitionMap.put("/user/**", "anon");
+        definitionMap.put("/configuration/**", "anon");
+        definitionMap.put("/v2/**", "anon");
+        definitionMap.put("/swagger-resources/**", "anon");
+        definitionMap.put("/webjars/**", "anon");
+        definitionMap.put("/swagger-ui", "anon");
+        definitionMap.put("/*.*", "anon");
         definitionMap.put("/upc/login", "upcLogin");
         definitionMap.put("/**", "upcAuth");
         setFilterChainDefinitionMap(definitionMap);

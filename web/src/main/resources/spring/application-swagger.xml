@@ -8,14 +8,12 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <mvc:annotation-driven/>
+    <mvc:resources location="classpath:/META-INF/resources/" mapping="swagger-ui.html"/>
+    <mvc:resources location="classpath:/META-INF/resources/webjars/" mapping="/webjars/**"/>
+    <!-- 引用Swagger 默认配置 -->
+    <bean class="springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration"
+          id="swagger2Config"/>
+    <!-- 添加Swagger2 扫描目录 -->
+    <context:component-scan base-package="com.xcjy.web.controller"/>
 
-    <context:component-scan base-package="springfox,com.xcjy.web">
-        <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.RestController"/>
-        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-    </context:component-scan>
-
-    <import resource="classpath:spring/application-db.xml"/>
-    <import resource="classpath:spring/application-shiro.xml"/>
-    <import resource="classpath:spring/application-swagger.xml" />
 </beans>
